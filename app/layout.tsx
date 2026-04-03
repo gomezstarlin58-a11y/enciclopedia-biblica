@@ -21,6 +21,7 @@ export default function RootLayout({
         {/* 🛡️ ¡ESTO ES EL SECRETO DE LA RESPONSIVIDAD! 🛡️ */}
         {/* Le dice al celular que se comporte como un celular */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="google-site-verification" content="SvNCPG3zYz3EJIZFcMn6AkNC7bbWqFx_5KvZ0RZ5ID8" />
       </head>
       <body
         className={`${playfair.className} bg-[#0c0d0c] text-[#F9F6F0] antialiased min-h-screen w-full`}
