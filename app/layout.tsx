@@ -4,10 +4,13 @@ import "./globals.css";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
 
-// Configuración de la información de tu web (Metadata)
 export const metadata: Metadata = {
   title: "Biblia IA - La Sabiduría de los Siglos",
   description: "Enciclopedia Bíblica interactiva con IA y Patrística",
+  // 👇 Aquí está tu llave de Google de forma segura para Next.js
+  verification: {
+    google: "SvNCPG3zYz3EJIZFcMn6AkNC7bbWqFx_5KvZ0RZ5ID8",
+  },
 };
 
 export default function RootLayout({
@@ -18,15 +21,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* 🛡️ ¡ESTO ES EL SECRETO DE LA RESPONSIVIDAD! 🛡️ */}
-        {/* Le dice al celular que se comporte como un celular */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <meta name="google-site-verification" content="SvNCPG3zYz3EJIZFcMn6AkNC7bbWqFx_5KvZ0RZ5ID8" />
       </head>
-      <body
-        className={`${playfair.className} bg-[#0c0d0c] text-[#F9F6F0] antialiased min-h-screen w-full`}
-      >
-        {/* Este contenedor asegura que el contenido no toque los bordes del celular */}
+      <body className={`${playfair.className} bg-[#0c0d0c] text-[#F9F6F0] antialiased min-h-screen w-full`}>
         <div className="w-full px-4 md:px-10 lg:px-20 py-10">
           {children}
         </div>
