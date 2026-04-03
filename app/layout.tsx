@@ -1,21 +1,34 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
+// Configuración de la información de tu web (Metadata)
 export const metadata: Metadata = {
-  title: "Biblia IA | La Sabiduría de los Siglos",
-  description: "Plataforma de estudio teológico, comunidad e Inteligencia Artificial.",
+  title: "Biblia IA - La Sabiduría de los Siglos",
+  description: "Enciclopedia Bíblica interactiva con IA y Patrística",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="es" data-scroll-behavior="smooth">
-      <body className={`${inter.className} ${playfair.variable} bg-[#0c0d0c] text-[#F9F6F0] antialiased selection:bg-[#D1A65B]/30`}>
-        {/* Aquí se cargará la presentación a pantalla completa */}
-        {children}
+    <html lang="es">
+      <head>
+        {/* 🛡️ ¡ESTO ES EL SECRETO DE LA RESPONSIVIDAD! 🛡️ */}
+        {/* Le dice al celular que se comporte como un celular */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </head>
+      <body
+        className={`${playfair.className} bg-[#0c0d0c] text-[#F9F6F0] antialiased min-h-screen w-full`}
+      >
+        {/* Este contenedor asegura que el contenido no toque los bordes del celular */}
+        <div className="w-full px-4 md:px-10 lg:px-20 py-10">
+          {children}
+        </div>
       </body>
     </html>
   );
