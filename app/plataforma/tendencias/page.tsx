@@ -52,7 +52,7 @@ export default function TendenciasPage() {
         {/* COLUMNA PRINCIPAL: TOP 5 MÁS LEÍDOS */}
         <div className="lg:col-span-2 space-y-4 md:space-y-6">
           <h2 className="text-xl md:text-2xl font-serif text-[#F9F6F0] flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
-            {/* CORREGIDO */}
+            {/* CORREGIDO: Una sola clase */}
             <TrendingUp size={24} className="text-[#D1A65B] w-5 h-5 md:w-6 md:h-6 shrink-0" /> Los Textos Más Leídos
           </h2>
 
@@ -111,7 +111,7 @@ export default function TendenciasPage() {
           <div className="bg-[#151715] border border-blue-900/30 rounded-[20px] md:rounded-3xl p-5 md:p-6 relative overflow-hidden">
             <Sparkles className="absolute -top-6 -right-6 text-blue-500/10 w-24 h-24 md:w-32 md:h-32 rotate-12" />
             <h3 className="text-[#F9F6F0] font-serif text-base md:text-lg flex items-center gap-2 border-b border-blue-900/30 pb-2 md:pb-3 mb-3 md:mb-4">
-              {/* CORREGIDO */}
+              {/* CORREGIDO: Una sola clase */}
               <Sparkles size={16} className="text-blue-400 w-4 h-4 md:w-5 md:h-5 shrink-0" /> Oráculo: Consultas Virales
             </h3>
             <ul className="space-y-3 md:space-y-4 relative z-10">
@@ -127,7 +127,7 @@ export default function TendenciasPage() {
           {/* Glosario Top */}
           <div className="bg-[#151715] border border-[#D1A65B]/20 rounded-[20px] md:rounded-3xl p-5 md:p-6">
             <h3 className="text-[#F9F6F0] font-serif text-base md:text-lg flex items-center gap-2 border-b border-[#D1A65B]/10 pb-2 md:pb-3 mb-3 md:mb-4">
-              {/* CORREGIDO */}
+              {/* CORREGIDO: Una sola clase */}
               <ScrollText size={16} className="text-[#D1A65B] w-4 h-4 md:w-5 md:h-5 shrink-0" /> Raíces más Investigadas
             </h3>
             <div className="flex flex-wrap gap-2">
