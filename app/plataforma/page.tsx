@@ -83,8 +83,11 @@ export default function HubCentralPage() {
         </h1>
         <p className="text-[#F9F6F0]/60 text-sm md:text-lg max-w-2xl font-light leading-relaxed">
           Plataforma de estudio exegético y debate teológico. Sumérgete en el canon bíblico con el apoyo de la patrística y la Inteligencia Artificial.
+
         </p>
       </div>
+
+
 
       {/* TARJETAS DE ACCESO RÁPIDO */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
