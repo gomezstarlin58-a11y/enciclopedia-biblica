@@ -6,9 +6,6 @@ export async function POST(req: Request) {
   try {
     const { pregunta, lente } = await req.json();
 
-    // Tu llave actual
-    const apiKey = "AIzaSyA6f18ILF0K9_a4etiVgXNl_ZsTYjyUhOk";
-    
     // 1. EL ESCUDO CACHÉ: Buscamos en Supabase primero
     const { data: memoria } = await supabase
       .from('memoria_ia')
@@ -21,10 +18,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ respuesta: memoria.respuesta, origen: 'memoria_caché' });
     }
 
-    // 2. LLAMAMOS A LA IA CON EL MODELO EXACTO DE TU LLAVE
-    const genAI = new GoogleGenerativeAI(apiKey);
+    // 2. LLAMAMOS A LA IA (USANDO LA CAJA FUERTE SECRETA)
+    // 👇 AQUÍ ESTÁ LA MAGIA: Ya no hay llave escrita, la lee en secreto de Vercel 👇
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
     
-    // ¡LA SOLUCIÓN! Usamos 'gemini-2.5-flash' porque está en tu lista de permitidos
+    // Usamos el modelo ultrarrápido
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     let promptContexto = "Eres un erudito bíblico doctoral. Rigor académico y exégesis profunda. Evita opiniones modernas o consejos de autoayuda.";
