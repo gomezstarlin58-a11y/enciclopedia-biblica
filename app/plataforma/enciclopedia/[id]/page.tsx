@@ -67,81 +67,83 @@ export default function LibroDetailPage() {
 
   if (errorInterno) {
     return (
-      <div className="p-20 text-center text-red-500 font-bold bg-[#0c0d0c] h-screen">
-        <p className="text-2xl mb-4">⚠️ ERROR EN LA MATRIZ</p>
-        <p className="text-white/50">{errorInterno}</p>
+      <div className="p-10 md:p-20 text-center text-red-500 font-bold bg-[#0c0d0c] h-screen">
+        <p className="text-xl md:text-2xl mb-4">⚠️ ERROR EN LA MATRIZ</p>
+        <p className="text-white/50 text-sm md:text-base">{errorInterno}</p>
         <button onClick={() => window.location.reload()} className="mt-8 bg-[#D1A65B] text-black px-6 py-2 rounded-lg">Reintentar</button>
       </div>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6 md:p-10 w-full animate-fade-in pb-20">
+    <div className="max-w-7xl mx-auto p-4 md:p-6 lg:p-10 w-full animate-fade-in pb-20 overflow-hidden">
       
       <button 
         onClick={() => router.push("/plataforma/enciclopedia")}
-        className="inline-flex items-center gap-2 text-[#D1A65B] hover:text-white transition-colors mb-10 text-xs font-bold tracking-widest uppercase"
+        className="inline-flex items-center gap-2 text-[#D1A65B] hover:text-white transition-colors mb-6 md:mb-10 text-xs font-bold tracking-widest uppercase"
       >
         <ArrowLeft size={16} /> Volver al Canon
       </button>
 
       {libro && (
-        <div className="bg-gradient-to-br from-[#151715] to-[#080908] border border-[#D1A65B]/30 rounded-[40px] p-10 md:p-16 mb-12 shadow-2xl relative overflow-hidden">
-          <BookOpen className="absolute -top-10 -right-10 w-80 h-80 text-[#D1A65B]/5 rotate-12 pointer-events-none" />
+        <div className="bg-gradient-to-br from-[#151715] to-[#080908] border border-[#D1A65B]/30 rounded-[30px] md:rounded-[40px] p-6 md:p-10 lg:p-16 mb-8 md:mb-12 shadow-2xl relative overflow-hidden">
+          <BookOpen className="absolute -top-10 -right-10 w-40 h-40 md:w-80 md:h-80 text-[#D1A65B]/5 rotate-12 pointer-events-none" />
           <div className="relative z-10">
-            <div className="flex gap-3 mb-6">
+            <div className="flex gap-3 mb-4 md:mb-6">
               <span className="text-[10px] text-[#080908] bg-[#D1A65B] px-3 py-1 rounded-full font-bold uppercase tracking-[0.2em]">
                 {libro.testamento}
               </span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-serif text-[#F9F6F0] mb-6 drop-shadow-xl italic">
+            {/* AQUÍ ESTÁ EL ARREGLO DEL TÍTULO: text-5xl en celular, text-8xl en PC, y break-words */}
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-serif text-[#F9F6F0] mb-4 md:mb-6 drop-shadow-xl italic break-words leading-tight">
               {libro.nombre}
             </h1>
-            <p className="text-[#F9F6F0]/60 text-xl font-light">
+            <p className="text-[#F9F6F0]/60 text-lg md:text-xl font-light">
               Crónica de <span className="text-[#F9F6F0] font-medium border-b border-[#D1A65B]/40">{libro.autor_tradicional}</span>
             </p>
           </div>
         </div>
       )}
 
-      <div className="mb-10 flex items-center justify-between border-b border-[#D1A65B]/10 pb-6">
-        <h2 className="text-4xl font-serif text-[#F9F6F0] flex items-center gap-4">
-          <Layers className="text-[#D1A65B]" size={32} /> Estudios Disponibles
+      {/* AQUÍ ESTÁ EL ARREGLO DE LA CABECERA DE ESTUDIOS: flex-col en celular para que no se apriete */}
+      <div className="mb-8 md:mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#D1A65B]/10 pb-6">
+        <h2 className="text-3xl md:text-4xl font-serif text-[#F9F6F0] flex items-center gap-3 md:gap-4">
+          <Layers className="text-[#D1A65B]" size={28} /> Estudios Disponibles
         </h2>
-        <span className="text-[#D1A65B] text-xs font-bold tracking-[0.3em] uppercase bg-[#D1A65B]/10 px-4 py-2 rounded-full border border-[#D1A65B]/20">
+        <span className="text-[#D1A65B] text-xs font-bold tracking-[0.3em] uppercase bg-[#D1A65B]/10 px-4 py-2 rounded-full border border-[#D1A65B]/20 whitespace-nowrap">
           {temas.length} Artículos
         </span>
       </div>
 
-      <div className="grid grid-cols-1 gap-5">
+      <div className="grid grid-cols-1 gap-4 md:gap-5">
         {temas.length === 0 ? (
-          <div className="p-20 text-center border border-dashed border-[#D1A65B]/20 rounded-[32px] bg-[#080908]">
-            <ScrollText className="w-16 h-16 text-[#D1A65B]/20 mx-auto mb-6" />
-            <p className="text-[#F9F6F0]/40 italic text-xl">Este volumen aún no ha sido redactado por los eruditos.</p>
+          <div className="p-10 md:p-20 text-center border border-dashed border-[#D1A65B]/20 rounded-[24px] md:rounded-[32px] bg-[#080908]">
+            <ScrollText className="w-12 h-12 md:w-16 md:h-16 text-[#D1A65B]/20 mx-auto mb-4 md:mb-6" />
+            <p className="text-[#F9F6F0]/40 italic text-lg md:text-xl">Este volumen aún no ha sido redactado por los eruditos.</p>
           </div>
         ) : (
           temas.map((tema) => (
             <Link 
               key={tema.id} 
               href={`/plataforma/estudio/${tema.id}`} 
-              className="group block bg-[#080908] border border-[#D1A65B]/10 hover:border-[#D1A65B]/50 hover:bg-[#151715] rounded-[24px] p-8 transition-all shadow-xl hover:-translate-y-1"
+              className="group block bg-[#080908] border border-[#D1A65B]/10 hover:border-[#D1A65B]/50 hover:bg-[#151715] rounded-[20px] md:rounded-[24px] p-5 md:p-8 transition-all shadow-xl hover:-translate-y-1"
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="flex items-center gap-6">
-                  <div className="w-14 h-14 bg-[#151715] border border-[#D1A65B]/20 rounded-2xl flex items-center justify-center text-[#D1A65B] font-bold font-serif text-2xl group-hover:bg-[#D1A65B] group-hover:text-[#080908] transition-all duration-500 shadow-inner">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6">
+                <div className="flex items-start md:items-center gap-4 md:gap-6">
+                  <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 bg-[#151715] border border-[#D1A65B]/20 rounded-xl md:rounded-2xl flex items-center justify-center text-[#D1A65B] font-bold font-serif text-xl md:text-2xl group-hover:bg-[#D1A65B] group-hover:text-[#080908] transition-all duration-500 shadow-inner">
                     {tema.numero_tema}
                   </div>
                   <div>
-                    <h3 className="text-[#F9F6F0] text-2xl font-serif mb-2 group-hover:text-[#D1A65B] transition-colors leading-tight">
+                    <h3 className="text-[#F9F6F0] text-xl md:text-2xl font-serif mb-2 group-hover:text-[#D1A65B] transition-colors leading-tight">
                       {tema.titulo_tema}
                     </h3>
-                    <p className="text-[#D1A65B]/60 text-sm font-bold uppercase tracking-widest flex items-center gap-2">
+                    <p className="text-[#D1A65B]/60 text-xs md:text-sm font-bold uppercase tracking-widest flex items-center gap-2">
                       <ScrollText size={14} /> {tema.capitulo_principal}
                     </p>
                   </div>
                 </div>
-                <div className="text-[#D1A65B] opacity-0 group-hover:opacity-100 transition-all flex items-center gap-2 font-bold text-xs uppercase tracking-widest">
-                  Abrir Estudio <ChevronRight size={18} />
+                <div className="text-[#D1A65B] md:opacity-0 group-hover:opacity-100 transition-all flex items-center justify-end gap-2 font-bold text-xs uppercase tracking-widest mt-2 md:mt-0">
+                  Abrir <ChevronRight size={16} className="md:w-[18px] md:h-[18px]" />
                 </div>
               </div>
             </Link>
