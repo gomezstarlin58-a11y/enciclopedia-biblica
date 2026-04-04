@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
-/* 👇 ESTE ES EL CABLE QUE TE FALTABA PARA QUE VUELVA EL COLOR 👇 */
 import "./globals.css";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
@@ -20,10 +19,9 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
-      <body className={`${playfair.className} bg-[#0c0d0c] text-[#F9F6F0] antialiased min-h-screen w-full`}>
-        <div className="w-full px-4 md:px-10 lg:px-20 py-10">
-          {children}
-        </div>
+      {/* 👇 Aquí eliminamos el 'div' asfixiante y dejamos que los hijos ocupen toda la pantalla 👇 */}
+      <body className={`${playfair.className} bg-[#0c0d0c] text-[#F9F6F0] antialiased min-h-screen w-full flex flex-col`}>
+        {children}
       </body>
     </html>
   );

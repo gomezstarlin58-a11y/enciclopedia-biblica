@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { BookOpen, Home, Flame, MessageSquare, ScrollText, Search, Settings, Sparkles, LogOut, User, ShieldCheck } from "lucide-react";
+import { BookOpen, Home, Flame, MessageSquare, ScrollText, Sparkles, LogOut, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { supabase } from "@/supabase";
@@ -22,7 +22,6 @@ export default function PlataformaLayout({ children }: { children: React.ReactNo
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        // Si no hay sesión, lo mandamos al login de inmediato
         router.push("/auth");
       } else {
         setUsuario(session.user);
@@ -32,7 +31,6 @@ export default function PlataformaLayout({ children }: { children: React.ReactNo
 
     verificarSesion();
 
-    // Escuchar si el usuario cierra sesión en otra pestaña
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_OUT") {
         router.push("/auth");
@@ -47,7 +45,6 @@ export default function PlataformaLayout({ children }: { children: React.ReactNo
     router.push("/auth");
   };
 
-  // Pantalla de carga mientras verificamos quién eres
   if (cargandoAuth) {
     return (
       <div className="h-screen w-full bg-[#0c0d0c] flex flex-col items-center justify-center">
@@ -60,8 +57,8 @@ export default function PlataformaLayout({ children }: { children: React.ReactNo
   return (
     <div className="flex h-screen w-full bg-[#0c0d0c] overflow-hidden">
       
-      {/* SIDEBAR */}
-      <aside className="w-[280px] border-r border-[#D1A65B]/10 bg-[#080908] hidden md:flex flex-col h-full relative z-20 shadow-2xl">
+      {/* SIDEBAR (Computadora) */}
+      <aside className="w-[280px] border-r border-[#D1A65B]/10 bg-[#080908] hidden md:flex flex-col h-full relative z-20 shadow-2xl shrink-0">
         <div className="h-20 flex items-center px-6 flex-shrink-0 border-b border-[#D1A65B]/[0.05]">
           <Link href="/plataforma" className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-md bg-[#D1A65B] flex items-center justify-center">
@@ -74,12 +71,23 @@ export default function PlataformaLayout({ children }: { children: React.ReactNo
         <nav className="flex-1 overflow-y-auto py-8 px-4 space-y-8">
           <div className="space-y-1.5">
             <p className="px-3 text-[10px] font-bold text-[#D1A65B]/40 uppercase tracking-widest mb-4">Menú Principal</p>
+            
             <Link href="/plataforma" className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${pathname === '/plataforma' ? 'bg-[#D1A65B]/10 text-[#D1A65B] border border-[#D1A65B]/20' : 'text-[#F9F6F0]/50 hover:text-[#F9F6F0] hover:bg-white/5'}`}>
               <Home size={18} /> Hub Central
             </Link>
+            
             <Link href="/plataforma/enciclopedia" className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${pathname.includes('/enciclopedia') ? 'bg-[#D1A65B]/10 text-[#D1A65B] border border-[#D1A65B]/20' : 'text-[#F9F6F0]/50 hover:text-[#F9F6F0] hover:bg-white/5'}`}>
               <ScrollText size={18} /> Enciclopedia
             </Link>
+
+            <Link href="/plataforma/debates" className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${pathname.includes('/debates') ? 'bg-[#D1A65B]/10 text-[#D1A65B] border border-[#D1A65B]/20' : 'text-[#F9F6F0]/50 hover:text-[#F9F6F0] hover:bg-white/5'}`}>
+              <MessageSquare size={18} /> Ágora / Debates
+            </Link>
+
+            <Link href="/plataforma/ia" className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${pathname.includes('/ia') ? 'bg-[#D1A65B]/10 text-[#D1A65B] border border-[#D1A65B]/20' : 'text-[#F9F6F0]/50 hover:text-[#F9F6F0] hover:bg-white/5'}`}>
+              <Sparkles size={18} /> Oráculo IA
+            </Link>
+
             <Link href="/plataforma/tendencias" className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${pathname === '/plataforma/tendencias' ? 'bg-[#D1A65B]/10 text-[#D1A65B] border border-[#D1A65B]/20' : 'text-[#F9F6F0]/50 hover:text-[#F9F6F0] hover:bg-white/5'}`}>
               <Flame size={18} /> Tendencias
             </Link>
@@ -90,7 +98,7 @@ export default function PlataformaLayout({ children }: { children: React.ReactNo
         <div className="p-4 border-t border-[#D1A65B]/10 bg-[#080908]">
           <div className="bg-[#151715] p-4 rounded-2xl border border-[#D1A65B]/10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-[#D1A65B] flex items-center justify-center text-[#080908] font-bold">
+              <div className="w-10 h-10 rounded-full bg-[#D1A65B] flex items-center justify-center text-[#080908] font-bold shrink-0">
                 {usuario?.email?.charAt(0).toUpperCase()}
               </div>
               <div className="overflow-hidden">
@@ -111,10 +119,26 @@ export default function PlataformaLayout({ children }: { children: React.ReactNo
       </aside>
 
       {/* CONTENIDO PRINCIPAL */}
-      <div className="flex-1 flex flex-col h-full relative">
-        <main className="flex-1 overflow-y-auto bg-[#0c0d0c] relative">
+      <div className="flex-1 flex flex-col h-full relative overflow-hidden">
+        <main className="flex-1 overflow-y-auto bg-[#0c0d0c] relative pb-20 md:pb-0">
           {children}
         </main>
+
+        {/* MENÚ INFERIOR (Solo para Celular) */}
+        <nav className="md:hidden fixed bottom-0 left-0 w-full bg-[#080908]/90 backdrop-blur-md border-t border-[#D1A65B]/20 flex justify-around items-center h-16 z-50">
+          <Link href="/plataforma" className={`p-2 ${pathname === '/plataforma' ? 'text-[#D1A65B]' : 'text-[#F9F6F0]/40'}`}>
+            <Home size={24} />
+          </Link>
+          <Link href="/plataforma/enciclopedia" className={`p-2 ${pathname.includes('/enciclopedia') ? 'text-[#D1A65B]' : 'text-[#F9F6F0]/40'}`}>
+            <ScrollText size={24} />
+          </Link>
+          <Link href="/plataforma/ia" className={`p-2 ${pathname.includes('/ia') ? 'text-[#D1A65B]' : 'text-[#F9F6F0]/40'}`}>
+            <Sparkles size={24} />
+          </Link>
+          <Link href="/plataforma/tendencias" className={`p-2 ${pathname.includes('/tendencias') ? 'text-[#D1A65B]' : 'text-[#F9F6F0]/40'}`}>
+            <Flame size={24} />
+          </Link>
+        </nav>
       </div>
 
     </div>
