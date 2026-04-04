@@ -1,19 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
+/* 1. FORZAMOS EL MODO OSCURO EN TODA LA PÁGINA */
+body {
+  background-color: #0c0d0c !important;
+  color: #F9F6F0 !important;
+}
+
+/* 2. LE ENSEÑAMOS TUS COLORES A TAILWIND V4 */
+@theme {
   --color-gold: #D1A65B;
   --color-dark: #0c0d0c;
   --color-light: #F9F6F0;
 }
 
-body {
-  background-color: var(--color-dark);
-  color: var(--color-light);
-}
-
-/* Animación de acercamiento lento para la imagen de fondo */
+/* 3. TUS ANIMACIONES DEL SCRIPTORIUM */
 @keyframes slow-zoom {
   0% { transform: scale(1); opacity: 0; }
   5% { opacity: 1; }
@@ -23,7 +23,6 @@ body {
   animation: slow-zoom 25s ease-out forwards;
 }
 
-/* Animación de aparición flotante para los textos */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
@@ -32,7 +31,7 @@ body {
   animation: fade-in-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-/* Retrasos para que los elementos aparezcan en cascada */
+/* 4. TUS RETRASOS EN CASCADA */
 .delay-100 { animation-delay: 100ms; }
 .delay-300 { animation-delay: 300ms; }
 .delay-500 { animation-delay: 500ms; }
